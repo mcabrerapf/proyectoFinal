@@ -1,0 +1,74 @@
+extends login
+
+block content
+
+    .container.user-main
+      .col-xs-6(style='border-right: 1px solid black;')
+        div(style='border-bottom: 1px solid black')
+          h4 
+            b Name:
+          p #{user.name}
+        div(style='border-bottom: 1px solid black')
+          h4 
+            b Instruments:
+          each instrument in user.instrument
+            .user-sub-category #{instrument}
+        div(style='border-bottom: 1px solid black')
+          h4 
+            b Genres:
+          each genre in user.genre
+            .user-sub-category #{genre}
+        div(style='border-bottom: 1px solid black')
+          h4 
+            b Material:
+          each material in user.material
+            .user-sub-category #{material}
+        div(style='border-bottom: 1px solid black')
+          h4 
+            b Bands:
+          each band in user.band
+            .user-sub-category #{band}
+        div(style='border-bottom: 1px solid black')
+          h4 
+            b Studies:
+          each study in user.studies
+            .user-sub-category #{study}
+        button.btn.btn-success.btn-block(style='width: 95%; margin-top: 20px; margin-bottom: 20px; padding: 20px;') Let's Jam!!!
+      .col-xs-6(style='text-align: center;')
+        img#user-image(src='http://pawsnpups.com/wp-content/themes/PNP/images/breeds/Chug.jpeg', alt='Avatar')
+        .col-xs-12.col-sm-6
+          h4 
+            b Local: 
+          h4.user-sub-category #{user.local}
+        .col-xs-12.col-sm-6
+          h4
+            b Teacher:
+          h4.user-sub-category #{user.teacherAvailable}
+        div(style='text-align: left; padding-left: 20%; margin-top: 120px')
+          h4 
+            b Description:
+          p
+            | #{user.description}
+          h4 
+            b Audios:
+          p #{user.audios}
+    .container(style='padding-top: 30px')
+      h1 Comments
+      #comments
+        h4(style='border-bottom: 1px solid black') David Soler
+        p
+          | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          | tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          | quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          | consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          | cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          | proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      #comments
+        h4(style='border-bottom: 1px solid black') Dani Perez
+        p
+          | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          | tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          | quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          | consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          | cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          | proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

@@ -1,0 +1,24 @@
+extends layout
+block content
+    h1 Wellcome to Jammer ma friend!
+    p Please login with your username and pass
+
+    .container
+      form.form-horizontal(action='/login', method='post')
+        .form-group
+          label.control-label.col-sm-2(for='') Username:
+          .col-sm-10
+            input#email.form-control(name='username' type='', placeholder='Enter username')
+        .form-group
+          label.control-label.col-sm-2(for='pwd') Password:
+          .col-sm-10
+            input#pwd.form-control(name='password' type='password', placeholder='Enter password')
+        .form-group
+          .col-sm-offset-2.col-sm-10
+            .checkbox
+              label
+                input(type='checkbox')
+                |  Remember me
+        .form-group
+          .col-sm-offset-2.col-sm-10
+            button.btn.btn-primary(type='submit') Submit

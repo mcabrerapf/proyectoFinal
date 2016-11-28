@@ -1,0 +1,17 @@
+doctype html
+html(lang='en')
+  head
+    title Jammer
+    script(type='text/javascript').
+      console.log("js is running...")
+    link(rel="stylesheet", href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    link(rel="stylesheet", href='/css/main.css')
+
+  body
+    include ./includes/navbar.pug
+    #body-items  
+      .container
+        block content
+
+    //script(type='text/javascript',src='https://code.jquery.com/jquery-2.0.3.min.js').
+    //script(type='text/javascript',src='/js/main.js').

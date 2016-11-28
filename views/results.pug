@@ -1,0 +1,69 @@
+extends layout  
+block content
+
+
+
+    .container
+        .flexer
+            each user in users
+                .col-xs-12.col-sm-6.col-md-4.col-lg-3
+                    .card(name=user._id)
+                      .card-top    
+                        h5
+                          b #{user.name}
+                        img.img-circle(src='http://pawsnpups.com/wp-content/themes/PNP/images/breeds/Chug.jpeg', alt='Avatar', style='width:50%; height:50%; padding-bottom: 10px; margin-top:-15px;')
+                      .card-body
+                        .card-category
+                            h6
+                                b Instruments
+                            each instrument in user.instrument
+                                .card-sub-category #{instrument}
+                        .card-category
+                            h6
+                                b Genres
+                            each genre in user.genre
+                                .card-sub-category #{genre}
+                        .card-category
+                            h6
+                                b Studies
+                            each studies in user.studies
+                                .card-sub-category  #{studies}
+                        .card-category
+                            h6
+                                b Material
+                            each material in user.material
+                                .card-sub-category #{material}
+                        .card-category
+                            h6(style='margin-top:5px; margin-bottom:10px;')
+                                b Local: 
+                                |  #{user.local} |
+                                b  Teacher: 
+                                |  #{user.teacherAvailable}
+                        .card-category
+                            h6
+                                b Bands
+                            each band in user.band
+                                .card-sub-category  #{band} 
+                        .card-button
+                            a(href='/user/' + user._id, style='text-decoration: none; color: white;')
+                                button.btn.btn-primary.btn-block(style='width: 95%;') More Info...
+                            button.btn.btn-success.btn-block(type='submit', style='width: 95%; background-color:#0d8163;') Let's Jam!!!
+
+    //- form#results(action='/results', method='post')
+    //-     .container
+    //-         ul
+    //-             each user in data
+    //-                 .form-group
+    //-                     li(class='hidden', name = "userID") #{user._id}
+    //-                 li Name: #{user.name}
+    //-                 li Instrumentos:
+    //-                     li #{user.instrument}
+    //-                 li Estudios: #{user.studies}
+    //-                 li Material: #{user.material}
+    //-                 li Local: #{user.local}
+    //-                 li Profesor: #{user.teacherAvailable}
+    //-                 li Bandas: #{user.band}
+    //-                 li Description: #{user.description}
+    //-                 button.btn.btn-primary(type='submit', style='margin-right: 10px;') More Details... 
+    //-                 button.btn.btn-success(type='submit') Lets Jam!!!
+    //-                 p -----------------------------------------

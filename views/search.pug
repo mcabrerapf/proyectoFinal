@@ -1,0 +1,47 @@
+extends layout
+block content
+
+    form#sign-up(action='/search', method='post')
+      .container(style='width: 50%')
+        h2 Lets Find your musician!
+        .form-group
+          label What instrument(s) are you looking for?
+          input.form-control(name='instrument', type='text', placeholder='Enter instrument...' required)
+        .form-group
+          label Looking for a specific genre?
+          input.form-control(name='genre', type='text', placeholder='Enter genre...' /*required*/)
+        .form-group
+          label Would you need him to have a practice place?
+          div(style='display: block;')
+          label
+            input(type='radio', name='local', value='Yes' /*required*/)
+            | Yes
+          label
+            input(type='radio', name='local', value='No' /*required*/)
+            | No
+          label
+            input(type='radio', name='local', value='' /*required*/)
+            | Doesn't Matter
+        .form-group
+          label Do you need to recieve classes from him/her? 
+          div(style='display: block;')
+            label
+              input(type='radio', name='teacherAvailable', value='Yes' /*required*/)
+              | Yes
+            label
+              input(type='radio', name='teacherAvailable', value='No' /*required*/)
+              | No
+            label
+              input(type='radio', name='teacherAvailable', value='' /*required*/)
+              | Doesn't Matter
+        .form-group
+          label Looking for a member of a specific band?
+          input.form-control(name='band', type='text', placeholder='Enter band name...')
+        //- .form-group
+        //-   label Looking for a member of a specific band?
+        //-   input.form-control(name='idSearch', type='text', placeholder='...')
+        div(style='margin-top: 20px; margin-bottom: 100px')
+          button.btn.btn-primary.btn-block(type='submit') Search!
+
+    block content
+
