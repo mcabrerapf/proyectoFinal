@@ -8,14 +8,14 @@
           span.icon-bar 
           span.icon-bar 
           span.icon-bar 
-        a.navbar-brand(href='/home') \\Jammer//
+        a.navbar-brand(href='/') \\Jammer//
       #navbar.navbar-collapse.collapse
         ul.nav.navbar-nav
           li
             a(href='/search') Search
           if (user)
             li
-              a= user.username
+              a(href='/main-user/' + user._id)= user.username
             li
               a(href='/logout', style='text-align:right') Logout
           if (!user)

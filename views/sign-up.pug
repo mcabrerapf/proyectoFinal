@@ -1,5 +1,4 @@
 extends layout
-
 block content
 	
 	form#sign-up(action='/sign-up', method='post')
@@ -10,7 +9,7 @@ block content
 				input.form-control(name='username', type='text', placeholder='Enter your username...' required)
 			.form-group
 				label Password
-				input.form-control(name='password', type='text', placeholder='Enter your password...' required)
+				input.form-control(name='password', type='password', placeholder='Enter your password...' required)
 			.form-group
 				label Full Name
 				input.form-control(name='name', type='text', placeholder='Enter your name...' )
@@ -46,7 +45,7 @@ block content
 						| No
 			.form-group
 				label Bands
-				input.form-control(name='band', type='text', placeholder='Enter bands you have played in...')
+				input.form-control(name='bands', type='text', placeholder='Enter bands you have played in...')
 			.form-group
 				label audios
 				input.form-control(name='audios', type='text', placeholder='Type your audio links...')

@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
 	const user = req.user
+	console.log(user)
 	res.render("index.pug", { user})
 })
 router.get('/sign-up', (req, res) => {
@@ -17,6 +18,10 @@ router.get('/sign-up-success', (req, res) => {
 router.get('/home', (req, res) => {
 	const user = req.user
 	res.render("index.pug", { user})
+})
+router.get('/main-user/:id', (req, res) => {
+	const user = req.user
+	res.render("main-user.pug", { user})
 })
 router.get('/user/:id', (req, res) =>{
 	const user = req.user
@@ -38,16 +43,16 @@ router.get('/results', (req, res) => {
 
 
 router.post('/sign-up', (req,res) => {
-	let { username, password, instrument, genre, studies, material, band, audios} = req.body;
+	let { name, username, password, instrument, genre, studies, material, bands, audios, teacherAvailable, local, pic, email, phone} = req.body;
 
 	instrument = instrument.split(", ");
 	genre = genre.split(", ");
 	studies = studies.split(", ");
 	material = material.split(", ");
-	band = band.split(", ");
+	bands = bands.split(", ");
 	audios = audios.split(", ");
 
-	const musician = new Account({ username, instrument, genre, studies, material, band, audios})
+	const musician = new Account({ name, username, instrument, genre, studies, material, bands, audios, teacherAvailable, local, pic, email, phone})
 
 	Account.register( musician, password, (err, account) => {
 		if (err) return res.render('sign-up', { account : account });
@@ -61,7 +66,7 @@ router.post('/sign-up', (req,res) => {
 // 	userInputs.genre = userInputs.genre.split(", ");
 // 	userInputs.studies = userInputs.studies.split(", ");
 // 	userInputs.material = userInputs.material.split(", ");
-// 	userInputs.band = userInputs.band.split(", ");
+// 	userInputs.bands = userInputs.bands.split(", ");
 // 	userInputs.audios = userInputs.audios.split(", ");
 
 
@@ -79,11 +84,11 @@ router.post('/search', (req,res) => {
 	const user = req.user
 	console.log(req.body)
 	var filter = {}
-	var { instrument, local, teacherAvailable, band, genre } = req.body;
-	if (band) {
-		console.log("we are in band")
-		bands = band.split(",");
-		filter.band = { $in: bands }
+	var { instrument, local, teacherAvailable, bands, genre } = req.body;
+	if (bands) {
+		console.log("we are in bands")
+		bands = bands.split(",");
+		filter.bands = { $in: bands }
 	}
 	if (genre) {
 		genre = genre.split(",");
@@ -116,7 +121,7 @@ router.get('/login', function(req, res) {
 	res.render('login', {message: req.flash('error')});
 });
 
-router.post('/login', passport.authenticate('local', { successRedirect: '/',
+router.post('/login', passport.authenticate('local', { successRedirect: '/main-user/:id',
 	failureRedirect: '/login',
 	failureFlash: true 
 })

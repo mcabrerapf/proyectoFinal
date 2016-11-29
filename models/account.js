@@ -13,12 +13,15 @@ const Account = new Schema({
 	material:[String],
 	local: String,
 	teacherAvailable: String,
-	band: [String],
+	bands: [String],
 	description: String,
 	pic: String,
 	email: String,
-	phone: Number,
-	audios: [String]
+	phone: String,
+	audios: [String],
+	comments:[{ id: String, name: String, comment: String }],
+	pending: [{id: String, name: String}],
+	friends: [{id: String, name: String}]
 });
 
 // Model definition
