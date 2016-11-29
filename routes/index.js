@@ -55,8 +55,12 @@ router.post('/sign-up', (req,res) => {
 	const musician = new Account({ name, username, instrument, genre, studies, material, bands, audios, teacherAvailable, local, pic, email, phone})
 
 	Account.register( musician, password, (err, account) => {
-		if (err) return res.render('sign-up', { account : account });
-		passport.authenticate('local')(req, res, () => res.redirect('/search') ) });
+		if (err) 
+		{
+			var erMessage = "The username is already taken"
+			return res.render('sign-up', { account : account, erMessage });
+		}
+		passport.authenticate('local')(req, res, () => res.redirect('/main-user/:id') ) });
 
 })
 

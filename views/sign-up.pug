@@ -5,6 +5,8 @@ block content
 		.container(style='width: 50%')
 			h2 Create New User
 			.form-group
+				if (erMessage)
+					p(style='color:red;')= erMessage
 				label User Name
 				input.form-control(name='username', type='text', placeholder='Enter your username...' required)
 			.form-group
