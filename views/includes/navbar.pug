@@ -13,11 +13,13 @@
         ul.nav.navbar-nav
           li
             a(href='/search') Search
-          li
-            a(href='/sign-up') Sign Up!
           if (user)
             li
-              a(href='/login')= user.username
+              a= user.username
+            li
+              a(href='/logout', style='text-align:right') Logout
           if (!user)
+            li
+              a(href='/sign-up') Sign Up!
             li
               a(href='/login') Login

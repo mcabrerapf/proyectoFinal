@@ -19,10 +19,11 @@ router.get('/home', (req, res) => {
 	res.render("index.pug", { user})
 })
 router.get('/user/:id', (req, res) =>{
+	const user = req.user
 	var id = req.params.id
-	Account.findById(id, (err, user) => {
+	Account.findById(id, (err, userById) => {
 		console.log(user)
-		res.render('user.pug', {user})	
+		res.render('user.pug', {userById, user})	
 	})
 	
 })
@@ -31,12 +32,12 @@ router.get('/search', (req, res) => {
 	res.render("search.pug", { user })
 })
 router.get('/results', (req, res) => {
+	const user = req.user
 	res.render("results.pug")
 })
 
 
 router.post('/sign-up', (req,res) => {
-
 	let { username, password, instrument, genre, studies, material, band, audios} = req.body;
 
 	instrument = instrument.split(", ");
@@ -74,14 +75,8 @@ router.post('/sign-up', (req,res) => {
 // 			res.redirect('/search') );
 // 	});
 // })
-router.get('/login', function(req, res) {
-	res.render('login', { user : req.user });
-});
-
-router.post('/login', passport.authenticate('local'), function(req, res) {
-	res.redirect('/');
-});
 router.post('/search', (req,res) => {
+	const user = req.user
 	console.log(req.body)
 	var filter = {}
 	var { instrument, local, teacherAvailable, band, genre } = req.body;
@@ -109,9 +104,22 @@ router.post('/search', (req,res) => {
 	Account.find( filter, function (err, users) {
 		if (err) return handleError(err);
 		console.log(users)
-		res.render("results", {users})
+		res.render("results", {users, user})
 	})
 
 })
+router.get('/logout', function(req, res) {
+	req.logout();
+	res.redirect('/');
+});
+router.get('/login', function(req, res) {
+	res.render('login', {message: req.flash('error')});
+});
+
+router.post('/login', passport.authenticate('local', { successRedirect: '/',
+	failureRedirect: '/login',
+	failureFlash: true 
+})
+);
 
 module.exports = router;

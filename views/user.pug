@@ -7,31 +7,31 @@ block content
         div(style='border-bottom: 1px solid black')
           h4 
             b Name:
-          p #{user.name}
+          p #{userById.name}
         div(style='border-bottom: 1px solid black')
           h4 
             b Instruments:
-          each instrument in user.instrument
+          each instrument in userById.instrument
             .user-sub-category #{instrument}
         div(style='border-bottom: 1px solid black')
           h4 
             b Genres:
-          each genre in user.genre
+          each genre in userById.genre
             .user-sub-category #{genre}
         div(style='border-bottom: 1px solid black')
           h4 
             b Material:
-          each material in user.material
+          each material in userById.material
             .user-sub-category #{material}
         div(style='border-bottom: 1px solid black')
           h4 
             b Bands:
-          each band in user.band
+          each band in userById.band
             .user-sub-category #{band}
         div(style='border-bottom: 1px solid black')
           h4 
             b Studies:
-          each study in user.studies
+          each study in userById.studies
             .user-sub-category #{study}
         button.btn.btn-success.btn-block(style='width: 95%; margin-top: 20px; margin-bottom: 20px; padding: 20px;') Let's Jam!!!
       .col-xs-6(style='text-align: center;')
@@ -39,19 +39,19 @@ block content
         .col-xs-12.col-sm-6
           h4 
             b Local: 
-          h4.user-sub-category #{user.local}
+          h4.user-sub-category #{userById.local}
         .col-xs-12.col-sm-6
           h4
             b Teacher:
-          h4.user-sub-category #{user.teacherAvailable}
+          h4.user-sub-category #{userById.teacherAvailable}
         div(style='text-align: left; padding-left: 20%; margin-top: 120px')
           h4 
             b Description:
           p
-            | #{user.description}
+            | #{userById.description}
           h4 
             b Audios:
-          p #{user.audios}
+          p #{userById.audios}
     .container(style='padding-top: 30px')
       h1 Comments
       #comments
