@@ -23,7 +23,6 @@ if ( fs.existsSync('.env') ) { // exists
 app.use( express.static('public') )
 app.set('view engine', 'pug')
 app.use( bodyparser.urlencoded({ extended: false }) )
-app.use('/', routes)
 // app.use( bodyParser.json() );
 app.use( cookieParser() );
 app.use( session({ secret: 'supersecretworddonottelltoanyone'}) );
@@ -57,10 +56,11 @@ passport.deserializeUser( Account.deserializeUser() );
 //   res.redirect('/');
 // });
 // test authentication
-function isAuthenticated(req, res, next) {
-  if ( req.isAuthenticated() ) return next();
-  res.redirect('/');
-}
+app.use('/', routes)
+// function isAuthenticated(req, res, next) {
+//   if ( req.isAuthenticated() ) return next();
+//   res.redirect('/');
+// }
 
 
 

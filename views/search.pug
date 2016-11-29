@@ -1,6 +1,7 @@
 extends layout
 block content
-
+    if (user)
+      h2= user.username
     form#sign-up(action='/search', method='post')
       .container(style='width: 50%')
         h2 Lets Find your musician!

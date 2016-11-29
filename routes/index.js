@@ -4,16 +4,19 @@ const Account = require('../models/account');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-	res.render("index.pug")
+	const user = req.user
+	res.render("index.pug", { user})
 })
 router.get('/sign-up', (req, res) => {
-	res.render("sign-up.pug")
+	const user = req.user
+	res.render("sign-up.pug", { user })
 })
 router.get('/sign-up-success', (req, res) => {
 	res.render("sign-up-success.pug")
 })
 router.get('/home', (req, res) => {
-	res.render("index.pug")
+	const user = req.user
+	res.render("index.pug", { user})
 })
 router.get('/user/:id', (req, res) =>{
 	var id = req.params.id
@@ -24,32 +27,53 @@ router.get('/user/:id', (req, res) =>{
 	
 })
 router.get('/search', (req, res) => {
-	res.render("search.pug")
+	const user = req.user
+	res.render("search.pug", { user })
 })
 router.get('/results', (req, res) => {
 	res.render("results.pug")
 })
 
+
 router.post('/sign-up', (req,res) => {
-	var userInputs = req.body
-	userInputs.instrument = userInputs.instrument.split(", ");
-	userInputs.genre = userInputs.genre.split(", ");
-	userInputs.studies = userInputs.studies.split(", ");
-	userInputs.material = userInputs.material.split(", ");
-	userInputs.band = userInputs.band.split(", ");
-	userInputs.audios = userInputs.audios.split(", ");
 
-	
-	const password = req.body.password;
+	let { username, password, instrument, genre, studies, material, band, audios} = req.body;
 
-	delete userInputs.password;
+	instrument = instrument.split(", ");
+	genre = genre.split(", ");
+	studies = studies.split(", ");
+	material = material.split(", ");
+	band = band.split(", ");
+	audios = audios.split(", ");
 
-	Account.register( new Account(userInputs), password, (err, account) => {
+	const musician = new Account({ username, instrument, genre, studies, material, band, audios})
+
+	Account.register( musician, password, (err, account) => {
 		if (err) return res.render('sign-up', { account : account });
-		passport.authenticate('local')(req, res, () =>  
-			res.redirect('/search') );
-	});
+		passport.authenticate('local')(req, res, () => res.redirect('/search') ) });
+
 })
+
+// router.post('/sign-up', (req,res) => {
+// 	var userInputs = req.body
+// 	userInputs.instrument = userInputs.instrument.split(", ");
+// 	userInputs.genre = userInputs.genre.split(", ");
+// 	userInputs.studies = userInputs.studies.split(", ");
+// 	userInputs.material = userInputs.material.split(", ");
+// 	userInputs.band = userInputs.band.split(", ");
+// 	userInputs.audios = userInputs.audios.split(", ");
+
+
+// 	const password = req.body.password;
+
+// 	delete userInputs.password;
+
+// 	Account.register( new Account(userInputs), password, (err, account) => {
+// 		if (err) return res.render('sign-up', { account : account });
+// 		passport.authenticate('local')(req, res, () =>  
+// 			res.redirect('/search') );
+// 	});
+// })
 router.get('/login', function(req, res) {
 	res.render('login', { user : req.user });
 });

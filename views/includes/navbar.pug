@@ -15,5 +15,9 @@
             a(href='/search') Search
           li
             a(href='/sign-up') Sign Up!
-          li
-            a(href='/login') Login
+          if (user)
+            li
+              a(href='/login')= user.username
+          if (!user)
+            li
+              a(href='/login') Login
