@@ -13,10 +13,10 @@ const session = require('express-session')
 const flash = require('connect-flash');
 const user = require('./models/user');
 const routes = require('./routes')
-const PORT = 3000; 	
+const PORT = process.env.PORT || 3000; 	
 const app = express()
 
-if ( fs.existsSync('.env') ) { // exists
+if ( fs.existsSync('.env') ) {
 	require('dotenv').load()
 }
 
