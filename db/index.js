@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 //const MongoClient = = require('mongodb').MongoClient
 mongoose.Promise = global.Promise;
 
-const urlDB = process.env.URL_DB
+const urlDB = process.env.URL_DB || "mongodb://localhost:27017/pFinal"
 //const urlDB = 'mongodb://localhost:27017/pFinal'
 
 

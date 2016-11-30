@@ -64,11 +64,11 @@ router.post('/user/:id', (req, res) =>{
 router.post('/sign-up', (req,res) => {
 	let { name, username, password, instrument, genre, studies, material, bands, audios, teacherAvailable, local, pic, email, phone} = req.body;
 
-	instrument = instrument.split(", ");
-	genre = genre.split(", ");
-	studies = studies.split(", ");
-	material = material.split(", ");
-	bands = bands.split(", ");
+	instrument = instrument.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+	genre = genre.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+	studies = studies.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+	material = material.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+	bands = bands.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
 	audios = audios.split(", ");
 
 	const musician = new Account({ name, username, instrument, genre, studies, material, bands, audios, teacherAvailable, local, pic, email, phone})
@@ -82,27 +82,6 @@ router.post('/sign-up', (req,res) => {
 		passport.authenticate('local')(req, res, () => res.redirect('/main-user/:id') ) });
 
 })
-
-// router.post('/sign-up', (req,res) => {
-// 	var userInputs = req.body
-// 	userInputs.instrument = userInputs.instrument.split(", ");
-// 	userInputs.genre = userInputs.genre.split(", ");
-// 	userInputs.studies = userInputs.studies.split(", ");
-// 	userInputs.material = userInputs.material.split(", ");
-// 	userInputs.bands = userInputs.bands.split(", ");
-// 	userInputs.audios = userInputs.audios.split(", ");
-
-
-// 	const password = req.body.password;
-
-// 	delete userInputs.password;
-
-// 	Account.register( new Account(userInputs), password, (err, account) => {
-// 		if (err) return res.render('sign-up', { account : account });
-// 		passport.authenticate('local')(req, res, () =>  
-// 			res.redirect('/search') );
-// 	});
-// })
 router.post('/search', (req,res) => {
 	const user = req.user
 	console.log(req.body)
@@ -110,16 +89,16 @@ router.post('/search', (req,res) => {
 	var { instrument, local, teacherAvailable, bands, genre } = req.body;
 	if (bands) {
 		console.log("we are in bands")
-		bands = bands.split(",");
+		bands = bands.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
 		filter.bands = { $in: bands }
 	}
 	if (genre) {
-		genre = genre.split(",");
+		genre = genre.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
 		filter.genre = { $in: genre }
 	}
 	if (instrument) {
 		console.log("we are in instruments")
-		instrument = instrument.split(",");
+		instrument = instrument.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
 		filter.instrument = { $in: instrument }
 	}
 	if(local){
@@ -129,8 +108,8 @@ router.post('/search', (req,res) => {
 		filter.teacherAvailable = teacherAvailable;
 	}
 	
-	Account.find(  new RegExp(data, 'i'), function (err, users) {
-		if (err) return handleError(err);
+	Account.find( filter, function (err, users) {
+		if (err) return (err);
 		console.log(users)
 		res.render("results", {users, user})
 	})
