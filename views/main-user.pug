@@ -32,6 +32,12 @@ block content
             b Studies:
           each study in user.studies
             .user-sub-category #{study}
+        div(style='border-bottom: 1px solid black')
+          h4 
+            b Friend Requests:
+          each request in user.friendRequestRecieved
+            .user-sub-category #{request.username}
+              button.btn.btn-primary(style='margin-top: 20px; margin-bottom: 20px; padding: 20px;') Accept Invite
         button.btn.btn-primary.btn-block(style='width: 95%; margin-top: 20px; margin-bottom: 20px; padding: 20px;') Edit my profile
       .col-xs-6(style='text-align: center;')
         img#user-image(src='http://pawsnpups.com/wp-content/themes/PNP/images/breeds/Chug.jpeg', alt='Avatar')

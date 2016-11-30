@@ -36,16 +36,11 @@ router.get('/search', (req, res) => {
 	const user = req.user
 	res.render("search.pug", { user })
 })
-router.get('/results', (req, res) => {
-	const user = req.user
-	res.render("results.pug")
-})
-
 router.post('/user/:id', (req, res) =>{
 	const user = req.user
 	var id = req.params.id
+	console.log("the user we want is " + req.body.nombre)
 	let { comment } = req.body
-	console.log(comment)
 	if(comment){
 		Account.update({"_id" : id}, {$push: { "comments": { "_id": user._id, "comment": comment, "username": user.username} }}, function (err, result) {
 			if (err) return (err);
@@ -57,7 +52,11 @@ router.post('/user/:id', (req, res) =>{
 		Account.update({"_id" : id}, {$push: { "friendRequestRecieved": { "_id": user._id, "username": user.username} }}, function (err, result) {
 			if (err) return (err);
 			console.log("friend request sent sucessfuly")
-			res.redirect('/user/' + id)
+			Account.update({"_id" : user._id}, {$push: { "friendRequestSent": { "_id": id, "username": req.body.nombre} }}, function (err, result) {
+				if (err) return (err);
+				console.log("friend request sent sucessfuly")
+				res.redirect('/user/' + id)
+			})
 		})
 	}
 })
