@@ -19,9 +19,9 @@ const Account = new Schema({
 	email: String,
 	phone: String,
 	audios: [String],
-	comments:[{ id: String, name: String, comment: String }],
-	pending: [{id: String, name: String}],
-	friends: [{id: String, name: String}]
+	comments:[{id: String, username: String, comment: String}],
+	pending: [{id: String, username: String}],
+	friends: [{id: String, username: String}]
 });
 
 // Model definition

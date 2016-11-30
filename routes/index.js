@@ -40,8 +40,16 @@ router.get('/results', (req, res) => {
 	const user = req.user
 	res.render("results.pug")
 })
-
-
+router.post('/user/:id', (req, res) =>{
+	const user = req.user
+	var id = req.params.id
+	let { comment } = req.body
+	Account.update({"_id" : id}, {$push: { "comments": { "comment": comment, "username": user.username} }}, function (err, result) {
+		if (err) return (err);
+		console.log("updated sucessfuly")
+		res.redirect('/user/' + id)
+	})
+})
 router.post('/sign-up', (req,res) => {
 	let { name, username, password, instrument, genre, studies, material, bands, audios, teacherAvailable, local, pic, email, phone} = req.body;
 
