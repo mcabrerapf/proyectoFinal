@@ -64,11 +64,11 @@ router.post('/user/:id', (req, res) =>{
 router.post('/sign-up', (req,res) => {
 	let { name, username, password, instrument, genre, studies, material, bands, audios, teacherAvailable, local, pic, email, phone} = req.body;
 
-	instrument = instrument.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
-	genre = genre.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
-	studies = studies.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
-	material = material.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
-	bands = bands.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+	instrument = instrument.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+	genre = genre.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+	studies = studies.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+	material = material.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+	bands = bands.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
 	audios = audios.split(", ");
 
 	const musician = new Account({ name, username, instrument, genre, studies, material, bands, audios, teacherAvailable, local, pic, email, phone})
@@ -89,16 +89,16 @@ router.post('/search', (req,res) => {
 	var { instrument, local, teacherAvailable, bands, genre } = req.body;
 	if (bands) {
 		console.log("we are in bands")
-		bands = bands.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+		bands = bands.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
 		filter.bands = { $in: bands }
 	}
 	if (genre) {
-		genre = genre.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+		genre = genre.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
 		filter.genre = { $in: genre }
 	}
 	if (instrument) {
 		console.log("we are in instruments")
-		instrument = instrument.replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+		instrument = instrument.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
 		filter.instrument = { $in: instrument }
 	}
 	if(local){
