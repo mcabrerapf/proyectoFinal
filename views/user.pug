@@ -32,7 +32,8 @@ block content
             b Studies:
           each study in userById.studies
             .user-sub-category #{study}
-        button.btn.btn-success.btn-block(style='width: 95%; margin-top: 20px; margin-bottom: 20px; padding: 20px;') Let's Jam!!!
+        form(action='/user/' + userById._id, method='post')
+          button.btn.btn-success.btn-block(type='submit', style='width: 95%; margin-top: 20px; margin-bottom: 20px; padding: 20px;') Let's Jam!!!
       .col-xs-6(style='text-align: center;')
         img#user-image(src='http://pawsnpups.com/wp-content/themes/PNP/images/breeds/Chug.jpeg', alt='Avatar')
         .col-xs-12.col-sm-6
