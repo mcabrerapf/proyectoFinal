@@ -129,7 +129,7 @@ router.post('/search', (req,res) => {
 		filter.teacherAvailable = teacherAvailable;
 	}
 	
-	Account.find( new RegExp('^'+filter+'$', "i"), function (err, users) {
+	Account.find(  new RegExp(data, 'i'), function (err, users) {
 		if (err) return handleError(err);
 		console.log(users)
 		res.render("results", {users, user})
