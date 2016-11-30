@@ -47,7 +47,7 @@ router.post('/user/:id', (req, res) =>{
 	let { comment } = req.body
 	console.log(comment)
 	if(comment){
-		Account.update({"_id" : id}, {$push: { "comments": { "comment": comment, "username": user.username} }}, function (err, result) {
+		Account.update({"_id" : id}, {$push: { "comments": { "_id": user._id, "comment": comment, "username": user.username} }}, function (err, result) {
 			if (err) return (err);
 			console.log("updated sucessfuly")
 			res.redirect('/user/' + id)
