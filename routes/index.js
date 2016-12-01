@@ -114,7 +114,7 @@ router.post('/user/:id', (req, res) =>{
 	}
 })
 router.post('/sign-up', (req,res) => {
-	let { name, username, password, instrument, genre, studies, material, bands, teacherAvailable, local,email, phone} = req.body;
+	let { name, username, password, instrument, genre, studies, material, bands, teacherAvailable, description, local,email, phone} = req.body;
 
 	instrument = instrument.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
 	genre = genre.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
@@ -122,7 +122,7 @@ router.post('/sign-up', (req,res) => {
 	material = material.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
 	bands = bands.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
 
-	const musician = new Account({ name, username, instrument, genre, studies, material, bands, teacherAvailable, local,email, phone})
+	const musician = new Account({ name, username, instrument, genre, studies, material, bands, teacherAvailable, description, local,email, phone})
 
 	Account.register( musician, password, (err, account) => {
 		if (err) 
