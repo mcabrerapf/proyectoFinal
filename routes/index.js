@@ -26,8 +26,6 @@ router.get('/user/:id', (req, res) =>{
 	const user = req.user
 	var id = req.params.id
 	Account.findById(id, (err, userById) => {
-		console.log(user)
-		console.log(userById.friendRequestRecieved)
 		if(user){
 			console.log("looping")
 			for(i=0; i<userById.friendRequestRecieved.length; i++ ){
@@ -39,18 +37,28 @@ router.get('/user/:id', (req, res) =>{
 				}
 				
 			}
-			for(i=0; i<userById.friends.length; i++ ){
+			for(i=0; i<user.friends.length; i++ ){
+				console.log("mega looper")
 				var buddies
-				console.log("comparing > " + userById.friends[i]._id + " <  with > " + user._id +"<")
-				if(String(userById.friends[i]._id) == String(user._id)){
+				console.log("comparing > " + user.friends[i]._id + " <  with > " + userById._id +"<")
+				if(String(user.friends[i]._id) == String(userById._id)){
 					console.log("son amigos")
 					buddies = true
 				}
 				
 			}
+			for(i=0; i<user.friendRequestRecieved.length; i++ ){
+				console.log("friend pending looper")
+				var friendRequestPending
+				console.log("comparing > " + user.friendRequestRecieved[i]._id + " <  with > " + userById._id +"<")
+				if(String(user.friendRequestRecieved[i]._id) == String(userById._id)){
+					friendRequestPending = true
+					console.log("friend request pending")
+				}
+				
+			}
 		}
-		console.log("son amigos === " + friendPending)
-		res.render('user.pug', {userById, user, friendPending, buddies})	
+		res.render('user.pug', {userById, user, friendPending, buddies, friendRequestPending})	
 	})
 	
 })
@@ -71,6 +79,26 @@ router.post('/user/:id', (req, res) =>{
 			if (err) return (err);
 			console.log("updated sucessfuly")
 			res.redirect('/user/' + id)
+		})
+	}else if(req.body.acceptFriend){
+		Account.update({"_id" : user._id}, {$push: { "friends": { "_id": req.body._id, "username": req.body.username, "name": req.body.name} }}, function (err, result) {
+			if (err) return (err);
+			console.log("ADDED FRIEND ==> " + req.body.name)
+			Account.update({"_id" : user._id}, {$pull: {'friendRequestRecieved': {'username': req.body.username}}}, function (err, result) {
+				if (err) return (err);
+				console.log("friend recieved removed sucessfuly")
+				Account.update({"username" : req.body.username}, {$push: {'friends': {'_id': user._id, 'username': user.username, "name": user.name}}}, function (err, result) {
+					if (err) return (err);
+					console.log("friend request removed sucessfuly")
+					Account.update({"username" : req.body.username}, {$pull: {'friendRequestSent': {'username': user.username}}}, function (err, result) {
+						if (err) return (err);
+						console.log("friend request removed sucessfuly")
+						res.redirect('/main-user/' + user._id)
+					})
+
+				})
+
+			})
 		})
 	}else{
 		console.log('sending friend request to ==>' + id + ' from user ==>' + user.username)

@@ -34,12 +34,18 @@ block content
             .user-sub-category #{study}
         form(action='/user/' + userById._id, method='post')
           .form-group
+            input.form-control(name='_id', type='text', class='hidden', value=userById._id)
+          .form-group
             input.form-control(name='username', type='text', class='hidden', value=userById.username)
           .form-group
             input.form-control(name='name', type='text', class='hidden', value=userById.name)
           if (user && friendPending)
             button.btn.btn-success.btn-block(style='width: 95%; margin-top: 20px; margin-bottom: 20px; padding: 20px;' disabled) Friend Request Sent
-          if (user && !friendPending && !buddies)
+          if (user && friendRequestPending)
+            form(action='/user/' + userById._id, method='post')
+              input.form-control(name='acceptFriend', type='text', value='existes', class='hidden')
+              button.btn.btn-success.btn-block(type='submit' , style='width: 95%; margin-top: 20px; margin-bottom: 20px; padding: 20px;') Accept Friend Request
+          if (user && !friendPending && !buddies && !friendRequestPending)
             button.btn.btn-success.btn-block(type='submit', style='width: 95%; margin-top: 20px; margin-bottom: 20px; padding: 20px;') Let's Jam!!!
           if (user && !friendPending && buddies)
             button.btn.btn-primary.btn-block(type='submit', style='width: 95%; margin-top: 20px; margin-bottom: 20px; padding: 20px;' disabled) You are friends, Go Jam!!

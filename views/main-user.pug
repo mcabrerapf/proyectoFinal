@@ -38,8 +38,9 @@ block content
                 b Friend Requests:
               each request, index in user.friendRequestRecieved
                 form(style='display:inline', action='/main-user/', method='post')
-                  .user-sub-category 
-                    b #{request.name}
+                  .user-sub-category
+                    a(href='/user/' + request._id) 
+                      b #{request.name}
                     .form-group
                       input.form-control(name='_id', type='text', class='hidden', value=request._id)
                       input.form-control(name='username', type='text', class='hidden', value=request.username)
@@ -52,14 +53,16 @@ block content
               b Pending Friend Requests:
             each sent in user.friendRequestSent
               .user-sub-category 
-                b #{sent.name}
+                a(href='/user/' + sent._id)
+                  b #{sent.name}
         div(style='border-bottom: 1px solid black')
           if (user.friends.length > 0)
             h4 
               b Friends:
             each friend in user.friends
               .user-sub-category 
-                b #{friend.name}
+                a(href='/user/' + friend._id)
+                  b #{friend.name}
         a(href='/', style='text-decoration:none')
           button.btn.btn-primary.btn-block(style='width: 95%; margin-top: 20px; margin-bottom: 20px; padding: 20px;') Edit my profile
       .col-xs-6(style='text-align: center;')
