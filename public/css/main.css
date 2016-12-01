@@ -52,7 +52,7 @@ body {
 	transition: 0.3s;
 	border-radius: 5px; /* 5px rounded corners */
 	margin-bottom: 50px;
-	background-color: teal;
+	background-color: #81a58f;
 }
 .card:hover {
 	box-shadow: 4px 8px 16px 4px rgba(0,0,0,0.8);
@@ -60,14 +60,14 @@ body {
 .card-top {
 	border-top-right-radius: 5px;
 	border-top-left-radius: 5px;
-	background-color: #286090;
+	background-color: #6f907c;
 	text-align: center;
 
 }
 .card-top h5 {
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
-	background-color: #2f3f76;
+	background-color: #254561;
 	text-align: center;
 	padding-top: 5px;
 	padding-bottom: 5px;

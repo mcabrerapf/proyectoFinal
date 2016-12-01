@@ -21,11 +21,12 @@ block content
                                 b Genres
                             each genre in userFound.genre
                                 .card-sub-category #{genre}
-                        .card-category
-                            h6
-                                b Studies
-                            each studies in userFound.studies
-                                .card-sub-category  #{studies}
+                        if (userFound.studies[0] != "")
+                            .card-category
+                                h6
+                                    b Studies
+                                each studies in userFound.studies
+                                    .card-sub-category  #{studies}
                         .card-category
                             h6
                                 b Material
@@ -37,11 +38,12 @@ block content
                                 |  #{userFound.local} |
                                 b  Teacher: 
                                 |  #{userFound.teacherAvailable}
-                        .card-category
-                            h6
-                                b Bands
-                            each band in userFound.bands
-                                .card-sub-category  #{band} 
+                        if (userFound.bands[0] != "")
+                            .card-category
+                                h6
+                                    b Bands
+                                each band in userFound.bands
+                                    .card-sub-category  #{band} 
                         .card-button
                             if (user)
                                 if (userFound.username === user.username)
