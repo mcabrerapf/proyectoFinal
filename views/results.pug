@@ -49,13 +49,11 @@ block content
                             if (user)
                                 if (userFound.username === user.username)
                                     a(href='/main-user/' + user._id, style='text-decoration: none; color: white;')
-                                        button.btn.btn-primary.btn-block(style='width: 95%;') View My Profile
+                                        button.btn.btn-success.btn-block(style='width: 95%;') View My Profile
                             if (user)
                                 if (userFound.username != user.username)
                                     a(href='/user/' + userFound._id, style='text-decoration: none; color: white;')
-                                        button.btn.btn-primary.btn-block(style='width: 95%;') More Info...
-                                    button.btn.btn-success.btn-block(type='submit', style='width: 95%; background-color:#0d8163;') Let's Jam!!!
+                                        button.btn.btn-primary.btn-block(style='width: 95%;') View Profile        
                             if (!user)
                                 a(href='/user/' + userFound._id, style='text-decoration: none; color: white;')
-                                        button.btn.btn-primary.btn-block(style='width: 95%;') More Info...
-                                button.btn.btn-success.btn-block(type='submit', style='width: 95%; background-color:#0d8163;') Let's Jam!!!
+                                        button.btn.btn-primary.btn-block(style='width: 95%;') View Profile

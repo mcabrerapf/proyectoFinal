@@ -34,12 +34,18 @@ block content
             .user-sub-category #{study}
         div(style='border-bottom: 1px solid black')
           if (user.friendRequestRecieved.length > 0)
-            h4 
-              b Friend Requests:
-            each request in user.friendRequestRecieved
-              .user-sub-category 
-                b #{request.name}
-                button.btn.btn-primary.btn-sm.btn-block(type='button' style='margin-top: 20px; margin-bottom: 20px;') Accept Invite
+              h4 
+                b Friend Requests:
+              each request, index in user.friendRequestRecieved
+                form(style='display:inline', action='/main-user/', method='post')
+                  .user-sub-category 
+                    b #{request.name}
+                    .form-group
+                      input.form-control(name='_id', type='text', class='hidden', value=request._id)
+                      input.form-control(name='username', type='text', class='hidden', value=request.username)
+                      input.form-control(name='name', type='text', class='hidden', value=request.name)
+                      input.form-control(name='index', type='text', class='hidden', value=index)
+                      button.btn.btn-primary.btn-sm.btn-block(type='submit' style='margin-top: 20px; margin-bottom: 20px;' id="ksdjhfaks") Accept Invite
         div(style='border-bottom: 1px solid black')
           if (user.friendRequestSent.length > 0)
             h4 
@@ -50,11 +56,12 @@ block content
         div(style='border-bottom: 1px solid black')
           if (user.friends.length > 0)
             h4 
-              b Pending Friend Requests:
+              b Friends:
             each friend in user.friends
               .user-sub-category 
                 b #{friend.name}
-        button.btn.btn-primary.btn-block(style='width: 95%; margin-top: 20px; margin-bottom: 20px; padding: 20px;') Edit my profile
+        a(href='/', style='text-decoration:none')
+          button.btn.btn-primary.btn-block(style='width: 95%; margin-top: 20px; margin-bottom: 20px; padding: 20px;') Edit my profile
       .col-xs-6(style='text-align: center;')
         img#user-image(src='http://pawsnpups.com/wp-content/themes/PNP/images/breeds/Chug.jpeg', alt='Avatar')
         .col-xs-12.col-sm-6

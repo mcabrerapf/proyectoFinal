@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
 	const user = req.user
-	console.log(user)
 	res.render("index.pug", { user})
 })
 router.get('/sign-up', (req, res) => {
@@ -35,14 +34,23 @@ router.get('/user/:id', (req, res) =>{
 				var friendPending
 				console.log("comparing > " + userById.friendRequestRecieved[i]._id + " <  with > " + user._id +"<")
 				if(String(userById.friendRequestRecieved[i]._id) == String(user._id)){
-					console.log("son amigos")
+					console.log("tiene request")
 					friendPending = true
+				}
+				
+			}
+			for(i=0; i<userById.friends.length; i++ ){
+				var buddies
+				console.log("comparing > " + userById.friends[i]._id + " <  with > " + user._id +"<")
+				if(String(userById.friends[i]._id) == String(user._id)){
+					console.log("son amigos")
+					buddies = true
 				}
 				
 			}
 		}
 		console.log("son amigos === " + friendPending)
-		res.render('user.pug', {userById, user, friendPending})	
+		res.render('user.pug', {userById, user, friendPending, buddies})	
 	})
 	
 })
@@ -50,12 +58,16 @@ router.get('/search', (req, res) => {
 	const user = req.user
 	res.render("search.pug", { user })
 })
+router.get('/results', (req, res) => {
+	const user = req.user
+	res.render("results.pug", { user })
+})
 router.post('/user/:id', (req, res) =>{
 	const user = req.user
 	var id = req.params.id
 	let { comment } = req.body
 	if(comment){
-		Account.update({"_id" : id}, {$push: { "comments": { "_id": user._id, "comment": comment, "username": user.username} }}, function (err, result) {
+		Account.update({"_id" : id}, {$push: { "comments": { "_id": user._id, "comment": comment, "username": user.username, "name": user.name} }}, function (err, result) {
 			if (err) return (err);
 			console.log("updated sucessfuly")
 			res.redirect('/user/' + id)
@@ -94,6 +106,34 @@ router.post('/sign-up', (req,res) => {
 		passport.authenticate('local')(req, res, () => res.redirect('/main-user/:id') ) });
 
 })
+router.post('/main-user/', (req, res) =>{
+	const user = req.user
+	console.log( req.body)
+	var index = req.body.index
+
+	Account.update({"_id" : user._id}, {$push: { "friends": { "_id": req.body._id, "username": req.body.username, "name": req.body.name} }}, function (err, result) {
+		if (err) return (err);
+		console.log("ADDED FRIEND ==> " + req.body.name)
+		Account.update({"_id" : user._id}, {$pull: {'friendRequestRecieved': {'username': req.body.username}}}, function (err, result) {
+			if (err) return (err);
+			console.log("friend recieved removed sucessfuly")
+			Account.update({"username" : req.body.username}, {$push: {'friends': {'_id': user._id, 'username': user.username, "name": user.name}}}, function (err, result) {
+				if (err) return (err);
+				console.log("friend request removed sucessfuly")
+				Account.update({"username" : req.body.username}, {$pull: {'friendRequestSent': {'username': user.username}}}, function (err, result) {
+					if (err) return (err);
+					console.log("friend request removed sucessfuly")
+					res.redirect('/')
+				})
+
+			})
+			
+		})
+	})
+})
+
+
+
 router.post('/search', (req,res) => {
 	const user = req.user
 	var noResults	
@@ -120,7 +160,7 @@ router.post('/search', (req,res) => {
 	if(teacherAvailable){
 		filter.teacherAvailable = teacherAvailable;
 	}
-	
+
 	Account.find( filter, function (err, users) {
 		if (err) return (err);
 		console.log(users)

@@ -19,7 +19,7 @@ const Account = new Schema({
 	email: String,
 	phone: String,
 	audios: [String],
-	comments:[{id: String, username: String, comment: String, date: String}],
+	comments:[{id: String, username: String, comment: String, name: String, date: String}],
 	friendRequestSent: [{id: String, username: String, name: String, date: String}],
 	friendRequestRecieved: [{id: String, username: String, name: String, date: String}],
 	friends: [{id: String, username: String, name: String, date: String}]
