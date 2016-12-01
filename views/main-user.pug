@@ -1,7 +1,6 @@
 extends layout
 block content
-
-    .container.user-main
+    .container.user-main(style='margin-top:2%;')
       .col-xs-6(style='border-right: 1px solid black;')
         div(style='border-bottom: 1px solid black')
           h4 
@@ -39,7 +38,7 @@ block content
               each request, index in user.friendRequestRecieved
                 form(style='display:inline', action='/main-user/', method='post')
                   .user-sub-category
-                    a(href='/user/' + request._id) 
+                    a(href='/user/' + request._id, style='text-decoration:none; color:white;') 
                       b #{request.name}
                     .form-group
                       input.form-control(name='_id', type='text', class='hidden', value=request._id)
@@ -53,7 +52,7 @@ block content
               b Pending Friend Requests:
             each sent in user.friendRequestSent
               .user-sub-category 
-                a(href='/user/' + sent._id)
+                a(href='/user/' + sent._id, style='text-decoration:none; color:white;')
                   b #{sent.name}
         div(style='border-bottom: 1px solid black')
           if (user.friends.length > 0)
@@ -61,9 +60,9 @@ block content
               b Friends:
             each friend in user.friends
               .user-sub-category 
-                a(href='/user/' + friend._id)
+                a(href='/user/' + friend._id, style='text-decoration:none; color:white;')
                   b #{friend.name}
-        a(href='/', style='text-decoration:none')
+        a(href='/', style='text-decoration:none' color:white;)
           button.btn.btn-primary.btn-block(style='width: 95%; margin-top: 20px; margin-bottom: 20px; padding: 20px;') Edit my profile
       .col-xs-6(style='text-align: center;')
         img#user-image(src='http://pawsnpups.com/wp-content/themes/PNP/images/breeds/Chug.jpeg', alt='Avatar')
@@ -84,7 +83,7 @@ block content
           //-   b Audios:
           //- p #{user.audios}
     .container(style='padding-top: 30px')
-      h1 Comments
+      h1(style='color:white;') Comments
       for comment in user.comments.reverse()
         #comments
             h4(style='border-bottom: 1px solid black') #{comment.username}

@@ -1,7 +1,6 @@
 extends layout
 block content
-	
-	form#sign-up(action='/sign-up', method='post')
+	form(action='/sign-up', method='post' style='margin-top:2%;')
 		.container(style='width: 50%')
 			h2 Create New User
 			.form-group
@@ -65,24 +64,3 @@ block content
 				input.form-control(name='phone', type='text', placeholder='Type your phone...' )
 			div(style='margin-top: 20px; margin-bottom: 100px')
 				button.btn.btn-primary.btn-block(type='submit') Submit
-	//
-		<div class="form-group">
-		<label for="inputPassword">Disabled</label>
-		<input class="form-control" id="disabledInput" type="text" disabled>
-		</div>
-		<div class="form-group has-success has-feedback">
-		<label for="inputSuccess2">Input with success</label>
-		<input type="text" class="form-control" id="inputSuccess2">
-		<span class="glyphicon glyphicon-ok form-control-feedback"></span>
-		</div>
-		<div class="form-group has-warning has-feedback">
-		<label for="inputWarning2">Input with warning</label>
-		<input type="text" class="form-control" id="inputWarning2">
-		<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
-		</div>
-		<div class="form-group has-error has-feedback">
-		<label for="inputError2">Input with error</label>
-		<input type="text" class="form-control" id="inputError2">
-		<span class="glyphicon glyphicon-remove form-control-feedback"></span>
-		</div>
-		</form>

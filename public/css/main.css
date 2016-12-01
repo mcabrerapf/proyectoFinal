@@ -27,7 +27,7 @@ input[type="checkbox"]:checked ~ .reveal-if-active {
 
 body {
 
-	background-image: url('http://imgwallpaper.info/download/20160201/life-is-music-simple-background-2560x1600.jpg');
+	background-image: url('../bckg.jpg');
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center;
@@ -52,10 +52,9 @@ body {
 	transition: 0.3s;
 	border-radius: 5px; /* 5px rounded corners */
 	margin-bottom: 50px;
-	background-color: white;
+	background-color: teal;
 }
 .card:hover {
-	background-color: white;
 	box-shadow: 4px 8px 16px 4px rgba(0,0,0,0.8);
 }
 .card-top {
@@ -95,7 +94,7 @@ body {
 	display: inline-block;
 	font-size: 11px;
 	border-radius: 5px;
-	background-color: white;
+	
 	padding: 2% 2% 2% 2%;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
@@ -124,9 +123,10 @@ img {
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 	margin-top: 10px;
 	/*	background-color: #eeeeee;*/
-	background-image: url(http://imgwallpaper.info/download/20160201/life-is-music-simple-background-2560x1600.jpg);
+	background-image: url(../bckg-sm.png);
 	background-repeat: no-repeat;
 	background-position: center;
+	background-size: 100% 100%;
 
 
 
@@ -159,9 +159,10 @@ img {
 	/*background-color: white;*/
 	padding: 2% 2% 2% 2%;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-	background-image: url(http://imgwallpaper.info/download/20160201/life-is-music-simple-background-2560x1600.jpg);
+	background-image: url(../bckg-plain.png);
 	background-repeat: no-repeat;
 	background-position: center;
+	background-size: 100% 100%;
 	/*background-color: #eee;*/
 
 }

@@ -1,6 +1,6 @@
 extends layout
 block content
-    form#sign-up(action='/search', method='post')
+    form(action='/search', method='post', style='margin-top:2%;')
       .container(style='width: 50%')
         h2 Lets Find your musician!
         .form-group
@@ -41,6 +41,3 @@ block content
         //-   input.form-control(name='idSearch', type='text', placeholder='...')
         div(style='margin-top: 20px; margin-bottom: 100px')
           button.btn.btn-primary.btn-block(type='submit') Search!
-
-    block content
-

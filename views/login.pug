@@ -1,7 +1,7 @@
 extends layout
 block content
-    .container
-      h2 Come in my friend
+    .container(style='width:50%; margin-top: 2%;')
+      h2 Login Fellow Musician!
       
       p(style='color:red; text-align:center') #{message}
       form.form-horizontal(action='/login', method='post')
@@ -13,12 +13,6 @@ block content
           label.control-label.col-sm-2(for='pwd') Password:
           .col-sm-10
             input#pwd.form-control(name='password' type='password', placeholder='Enter password')
-        .form-group
-          .col-sm-offset-2.col-sm-10
-            .checkbox
-              label
-                input(type='checkbox')
-                |  Remember me
         .form-group
           .col-sm-offset-2.col-sm-10
             button.btn.btn-primary.btn-block(type='submit') Submit
