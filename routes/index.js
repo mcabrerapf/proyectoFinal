@@ -34,13 +34,11 @@ router.get('/user/:id', (req, res) =>{
 			for(i=0; i<userById.friendRequestRecieved.length; i++ ){
 				var friendPending
 				console.log("comparing > " + userById.friendRequestRecieved[i]._id + " <  with > " + user._id +"<")
-				console.log(typeof userById.friendRequestRecieved[i]._id )
-				console.log(typeof user._id)
-				if(userById.friendRequestRecieved[i]._id === user._id){
+				if(String(userById.friendRequestRecieved[i]._id) == String(user._id)){
+					console.log("son amigos")
 					friendPending = true
-
 				}
-				if (friendPending = true){break;}
+				
 			}
 		}
 		console.log("son amigos === " + friendPending)
@@ -98,6 +96,7 @@ router.post('/sign-up', (req,res) => {
 })
 router.post('/search', (req,res) => {
 	const user = req.user
+	var noResults	
 	console.log(req.body)
 	var filter = {}
 	var { instrument, local, teacherAvailable, bands, genre } = req.body;
@@ -125,13 +124,16 @@ router.post('/search', (req,res) => {
 	Account.find( filter, function (err, users) {
 		if (err) return (err);
 		console.log(users)
-		res.render("results", {users, user})
+		if (users.length === 0){
+			noResults = "check your spelling dumbfuck"
+		}
+		res.render("results", {users, user, noResults})
 	})
 
 })
 router.get('/logout', function(req, res) {
 	req.logout();
-	res.redirect('/');
+	res.redirect('/login');
 });
 router.get('/login', function(req, res) {
 	res.render('login', {message: req.flash('error')});
