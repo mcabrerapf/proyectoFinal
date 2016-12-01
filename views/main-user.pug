@@ -21,16 +21,18 @@ block content
             b Material:
           each material in user.material
             .user-sub-category #{material}
-        div(style='border-bottom: 1px solid black')
-          h4 
-            b Bands:
-          each band in user.bands
-            .user-sub-category #{band}
-        div(style='border-bottom: 1px solid black')
-          h4 
-            b Studies:
-          each study in user.studies
-            .user-sub-category #{study}
+        if (user.bands[0] != "")
+          div(style='border-bottom: 1px solid black')
+            h4 
+              b Bands:
+            each band in user.bands
+              .user-sub-category #{band}
+        if (user.studies[0] != "")
+          div(style='border-bottom: 1px solid black')
+            h4 
+              b Studies:
+            each study in user.studies
+              .user-sub-category #{study}
         div(style='border-bottom: 1px solid black')
           if (user.friendRequestRecieved.length > 0)
               h4 
@@ -65,7 +67,7 @@ block content
         a(href='/', style='text-decoration:none' color:white;)
           button.btn.btn-primary.btn-block(style='width: 95%; margin-top: 20px; margin-bottom: 20px; padding: 20px;') Edit my profile
       .col-xs-6(style='text-align: center;')
-        img#user-image(src='http://pawsnpups.com/wp-content/themes/PNP/images/breeds/Chug.jpeg', alt='Avatar')
+        img#user-image(src='../default-avatar.png')
         .col-xs-12.col-sm-6
           h4 
             b Local: 
@@ -82,7 +84,7 @@ block content
           //- h4 
           //-   b Audios:
           //- p #{user.audios}
-    .container(style='padding-top: 30px')
+    .container(style='padding-top: 30px; padding-bottom:50px;')
       h1(style='color:white;') Comments
       for comment in user.comments.reverse()
         #comments

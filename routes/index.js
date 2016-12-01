@@ -12,7 +12,8 @@ router.get('/sign-up', (req, res) => {
 	res.render("sign-up.pug", { user })
 })
 router.get('/sign-up-success', (req, res) => {
-	res.render("sign-up-success.pug")
+	const user = req.user
+	res.render("sign-up-success.pug", {user})
 })
 router.get('/home', (req, res) => {
 	const user = req.user
@@ -128,9 +129,9 @@ router.post('/sign-up', (req,res) => {
 		if (err) 
 		{
 			var erMessage = "The username is already taken"
-			return res.render('sign-up', { account : account, erMessage });
+			return res.render('sign-up', {  erMessage });
 		}
-		passport.authenticate('local')(req, res, () => res.redirect('/main-user/:id') ) });
+		passport.authenticate('local')(req, res, () => res.redirect('/sign-up-success') ) });
 
 })
 router.post('/main-user/', (req, res) =>{
