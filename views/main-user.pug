@@ -33,11 +33,27 @@ block content
           each study in user.studies
             .user-sub-category #{study}
         div(style='border-bottom: 1px solid black')
-          h4 
-            b Friend Requests:
-          each request in user.friendRequestRecieved
-            .user-sub-category #{request.username}
-              button.btn.btn-primary(style='margin-top: 20px; margin-bottom: 20px; padding: 20px;') Accept Invite
+          if (user.friendRequestRecieved.length > 0)
+            h4 
+              b Friend Requests:
+            each request in user.friendRequestRecieved
+              .user-sub-category 
+                b #{request.name}
+                button.btn.btn-primary.btn-sm.btn-block(type='button' style='margin-top: 20px; margin-bottom: 20px;') Accept Invite
+        div(style='border-bottom: 1px solid black')
+          if (user.friendRequestSent.length > 0)
+            h4 
+              b Pending Friend Requests:
+            each sent in user.friendRequestSent
+              .user-sub-category 
+                b #{sent.name}
+        div(style='border-bottom: 1px solid black')
+          if (user.friends.length > 0)
+            h4 
+              b Pending Friend Requests:
+            each friend in user.friends
+              .user-sub-category 
+                b #{friend.name}
         button.btn.btn-primary.btn-block(style='width: 95%; margin-top: 20px; margin-bottom: 20px; padding: 20px;') Edit my profile
       .col-xs-6(style='text-align: center;')
         img#user-image(src='http://pawsnpups.com/wp-content/themes/PNP/images/breeds/Chug.jpeg', alt='Avatar')

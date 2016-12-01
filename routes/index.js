@@ -28,7 +28,23 @@ router.get('/user/:id', (req, res) =>{
 	var id = req.params.id
 	Account.findById(id, (err, userById) => {
 		console.log(user)
-		res.render('user.pug', {userById, user})	
+		console.log(userById.friendRequestRecieved)
+		if(user){
+			console.log("looping")
+			for(i=0; i<userById.friendRequestRecieved.length; i++ ){
+				var friendPending
+				console.log("comparing > " + userById.friendRequestRecieved[i]._id + " <  with > " + user._id +"<")
+				console.log(typeof userById.friendRequestRecieved[i]._id )
+				console.log(typeof user._id)
+				if(userById.friendRequestRecieved[i]._id === user._id){
+					friendPending = true
+
+				}
+				if (friendPending = true){break;}
+			}
+		}
+		console.log("son amigos === " + friendPending)
+		res.render('user.pug', {userById, user, friendPending})	
 	})
 	
 })
@@ -39,7 +55,6 @@ router.get('/search', (req, res) => {
 router.post('/user/:id', (req, res) =>{
 	const user = req.user
 	var id = req.params.id
-	console.log("the user we want is " + req.body.nombre)
 	let { comment } = req.body
 	if(comment){
 		Account.update({"_id" : id}, {$push: { "comments": { "_id": user._id, "comment": comment, "username": user.username} }}, function (err, result) {
@@ -49,10 +64,10 @@ router.post('/user/:id', (req, res) =>{
 		})
 	}else{
 		console.log('sending friend request to ==>' + id + ' from user ==>' + user.username)
-		Account.update({"_id" : id}, {$push: { "friendRequestRecieved": { "_id": user._id, "username": user.username} }}, function (err, result) {
+		Account.update({"_id" : id}, {$push: { "friendRequestRecieved": { "_id": user._id, "username": user.username, "name": user.name} }}, function (err, result) {
 			if (err) return (err);
 			console.log("friend request sent sucessfuly")
-			Account.update({"_id" : user._id}, {$push: { "friendRequestSent": { "_id": id, "username": req.body.nombre} }}, function (err, result) {
+			Account.update({"_id" : user._id}, {$push: { "friendRequestSent": { "_id": id, "username": req.body.username, "name": req.body.name} }}, function (err, result) {
 				if (err) return (err);
 				console.log("friend request sent sucessfuly")
 				res.redirect('/user/' + id)
