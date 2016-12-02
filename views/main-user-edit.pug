@@ -1,0 +1,43 @@
+extend layout	
+block content	
+	form(action='/main-user-edit/:id', method='post' style='margin-top:2%;')
+		.container(style='width: 50%')
+			h2 Change the fields you wish to edit
+			h5 Fields that ask for multiple inputs should be separated by commas and spaces
+			.form-group
+				input.form-control(name='_id', type='text', value= user._id, class='hidden')
+			.form-group
+				label Full Name (*)
+				input.form-control(name='name', type='text', placeholder='Enter your name...' value= user.name)
+			.form-group
+				label Instrument (*)
+				input.form-control(name='instrument', type='text', placeholder='What instruments do you play?' value= user.instrument[0])
+			.form-group
+				label Genres (*)
+				input.form-control(name='genre', type='text', placeholder='What Genres do you play?' value= user.genre[0])
+			.form-group
+				label Studies
+				input.form-control(name='studies', type='text', placeholder='List your studies if any...' value= user.studies[0])
+			.form-group
+				label Material (*)
+				input.form-control(name='material', type='text', placeholder='What musical material do you own? (Ex. Guitar, Bass, Guitar Amp)' value= user.material[0])
+			.form-group
+				label Bands
+				input.form-control(name='bands', type='text', placeholder='Enter bands you have played in (if none leave empty)...' value= user.bands[0])
+			//- .form-group
+			//- 	label audios
+			//- 	input.form-control(name='audios', type='text', placeholder='Type your audio links...')
+			//- .form-group
+			//- 	label Pic
+			//- 	input.form-control(name='pic', type='text')
+			h2 Brief Description (*)
+			textarea(rows='4', cols='30', name='description', type='text', placeholder='Tell us about yourself...' value= user.description)
+			h2 External contact info:
+			.form-group
+				label Email (*)
+				input.form-control(name='email', type='email', placeholder='Type your email...' value= user.email)
+			div
+				label Phone (*)
+				input.form-control(name='phone', type='text', placeholder='Type your phone...' value= user.phone)
+			div(style='margin-top: 20px; margin-bottom: 100px')
+				button.btn.btn-primary.btn-block(type='submit') Submit

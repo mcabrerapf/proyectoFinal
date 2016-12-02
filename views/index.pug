@@ -1,11 +1,16 @@
 extends layout
 block content
-  .container.theme-showcase(role='main')
-    h1 Allo
-    p Welcome to jammer moodafoka!!!
-        //- .jumbotron
-        //-   ul#tasks.list-group
-        //-     each task in pending
-        //-       li.list-group-item(data-index=task._id)= task.desc
-        //-         a(class="delete", href="#") delete
-        //-         a(class="complete", href="#") complete
+  .container.user-main(style='margin-top:2%; text-align:center; width:50%;')
+    h1 Welcome to Jammer!!
+    p
+        | A social network 
+        b by
+        |  musicians 
+        b for
+        |  musicians!
+    p
+        | Create an 
+        a(href='/sign-up') Account 
+        | and 
+        a(href='/search') Search
+        |  for the specific musician you wish to jam with!

@@ -2,65 +2,67 @@ extends layout
 block content
 	form(action='/sign-up', method='post' style='margin-top:2%;')
 		.container(style='width: 50%')
-			h2 Create New User
+			h2 Create Your Jammer User
+			h5 Fields with an (*) are required.
+			h5 Fields that ask for multiple inputs should be separated by commas and spaces
 			.form-group
 				if (erMessage)
 					p(style='color:red;')= erMessage
-				label User Name
-				input.form-control(name='username', type='text', placeholder='Enter your username...' required)
+				label User Name (*)
+				input.form-control(name='username', type='text', placeholder='Enter your username...' required) 
 			.form-group
-				label Password
+				label Password (*)
 				input.form-control(name='password', type='password', placeholder='Enter your password...' required)
 			.form-group
-				label Full Name
+				label Full Name (*)
 				input.form-control(name='name', type='text', placeholder='Enter your name...' required)
 			.form-group
-				label Instrument
+				label Instrument (*)
 				input.form-control(name='instrument', type='text', placeholder='What instruments do you play?' required)
 			.form-group
-				label Genres
-				input.form-control(name='genre', type='text', placeholder='What Genres do you play?' )
+				label Genres (*)
+				input.form-control(name='genre', type='text', placeholder='What Genres do you play?' required)
 			.form-group
 				label Studies
 				input.form-control(name='studies', type='text', placeholder='List your studies if any...')
 			.form-group
-				label Material
-				input.form-control(name='material', type='text', placeholder='What musical material do you own? (Ex. Guitar, Bass, Guitar Amp)')
+				label Material (*)
+				input.form-control(name='material', type='text', placeholder='What musical material do you own? (Ex. Guitar, Bass, Guitar Amp)' required)
 			.form-group
-				label Do you have a place for rehersals?
+				label Do you have a place for rehersals? (*)
 				div(style='display: block;')
 				label
-					input(type='radio', name='local', value='Yes' )
-					| Yes
+					input(type='radio', name='local', value='Yes' required )
+					| &nbspYes&nbsp
 				label
-					input(type='radio', name='local', value='No' )
-					| No
+					input(type='radio', name='local', value='No' required )
+					| &nbspNo
 			.form-group
-				label Are you available as a teacher? 
+				label Are you available as a teacher? (*)
 				div(style='display: block;')
 					label
-						input(type='radio', name='teacherAvailable', value='Yes' )
-						| Yes
+						input(type='radio', name='teacherAvailable', value='Yes' required )
+						| &nbspYes&nbsp
 					label
-						input(type='radio', name='teacherAvailable', value='No' )
-						| No
+						input(type='radio', name='teacherAvailable', value='No' required )
+						| &nbspNo
 			.form-group
 				label Bands
-				input.form-control(name='bands', type='text', placeholder='Enter bands you have played in...')
+				input.form-control(name='bands', type='text', placeholder='Enter bands you have played in (if none leave empty)...')
 			//- .form-group
 			//- 	label audios
 			//- 	input.form-control(name='audios', type='text', placeholder='Type your audio links...')
 			//- .form-group
 			//- 	label Pic
 			//- 	input.form-control(name='pic', type='text')
-			h2 Brief Description
-			textarea(rows='4', cols='30', name='description', type='text', placeholder='Tell us about yourself...')
+			h2 Brief Description (*)
+			textarea(rows='4', cols='30', name='description', type='text', placeholder='Tell us about yourself...' required)
 			h2 External contact info:
 			.form-group
-				label Email
-				input.form-control(name='email', type='email', placeholder='Type your email...' )
+				label Email (*)
+				input.form-control(name='email', type='email', placeholder='Type your email...' required)
 			div
-				label Phone
-				input.form-control(name='phone', type='text', placeholder='Type your phone...' )
+				label Phone (*)
+				input.form-control(name='phone', type='text', placeholder='Type your phone...' required)
 			div(style='margin-top: 20px; margin-bottom: 100px')
 				button.btn.btn-primary.btn-block(type='submit') Submit

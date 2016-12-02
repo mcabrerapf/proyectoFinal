@@ -3,8 +3,9 @@ block content
     form(action='/search', method='post', style='margin-top:2%;')
       .container(style='width: 50%')
         h2 Lets Find your musician!
+        h5 Fields with am (*) are required
         .form-group
-          label What instrument(s) are you looking for?
+          label What instrument(s) are you looking for? (*)
           input.form-control(name='instrument', type='text', placeholder='Enter instrument...' required)
         .form-group
           label Looking for a specific genre?
@@ -14,25 +15,25 @@ block content
           div(style='display: block;')
           label
             input(type='radio', name='local', value='Yes' /*required*/)
-            | Yes
+            | &nbspYes&nbsp
           label
             input(type='radio', name='local', value='No' /*required*/)
-            | No
+            | &nbspNo&nbsp
           label
             input(type='radio', name='local', value='' /*required*/)
-            | Doesn't Matter
+            | &nbspDoesn't Matter
         .form-group
           label Do you need to recieve classes from him/her? 
           div(style='display: block;')
             label
               input(type='radio', name='teacherAvailable', value='Yes' /*required*/)
-              | Yes
+              | &nbspYes&nbsp
             label
               input(type='radio', name='teacherAvailable', value='No' /*required*/)
-              | No
+              | &nbspNo&nbsp
             label
               input(type='radio', name='teacherAvailable', value='' /*required*/)
-              | Doesn't Matter
+              | &nbspDoesn't Matter
         .form-group
           label Looking for a member of a specific band?
           input.form-control(name='bands', type='text', placeholder='Enter band name...')

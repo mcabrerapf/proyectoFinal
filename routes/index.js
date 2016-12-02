@@ -23,6 +23,34 @@ router.get('/main-user/:id', (req, res) => {
 	const user = req.user
 	res.render("main-user.pug", { user})
 })
+router.get('/main-user-edit/:id', (req, res) =>{
+	let user = req.user
+	user.instrument = user.instrument.join(", ")
+	user.genre = user.genre.join(", ")
+	user.studies = user.studies.join(", ")
+	user.material = user.material.join(", ")
+	user.bands = user.bands.join(", ")
+	res.render('main-user-edit.pug', { user })
+
+})
+router.post('/main-user-edit/:id', (req, res) =>{
+	let updatedUser = req.body
+	console.log(updatedUser)
+	updatedUser.bands = updatedUser.bands.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+	updatedUser.instrument = updatedUser.instrument.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+	updatedUser.genre = updatedUser.genre.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+	updatedUser.studies = updatedUser.studies.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+	updatedUser.material = updatedUser.material.toLowerCase().replace(/\b[a-z]/g,function(f){return f.toUpperCase();}).split(", ")
+	console.log(updatedUser._id)
+
+	Account.update({"_id" : updatedUser._id}, {$set: updatedUser }, function (err, result) {
+		if (err) return (err);
+		console.log(result)
+		console.log("updated sucessfuly")
+		res.redirect('/main-user/' + updatedUser._id)
+	})
+	
+})
 router.get('/user/:id', (req, res) =>{
 	const user = req.user
 	var id = req.params.id
@@ -151,7 +179,7 @@ router.post('/main-user/', (req, res) =>{
 				Account.update({"username" : req.body.username}, {$pull: {'friendRequestSent': {'username': user.username}}}, function (err, result) {
 					if (err) return (err);
 					console.log("friend request removed sucessfuly")
-					res.redirect('/')
+					res.redirect('/main-user/' + user._id)
 				})
 
 			})
