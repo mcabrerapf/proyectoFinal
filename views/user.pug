@@ -5,6 +5,8 @@ block content
       div
         h1=userById.name
         if (user && buddies)
+          h4 
+            b Contact Info:
           p 
             b Email: 
             | #{userById.email} 
@@ -84,10 +86,11 @@ block content
       form(action='/user/' + userById._id, method='post')
         textarea(rows='4', cols='40', name='comment' placeholder='Write a comment...')
         button.btn.btn-primary.btn-block(type='submit', style='width:80px') Submit
-    for comment in userById.comments.reverse()
-      #comments
-          h4(style='border-bottom: 1px solid black') #{comment.name}
-          p #{comment.comment}
+    div(style='margin-top:30px;')
+      for comment in userById.comments.reverse()
+        #comments
+            h4(style='border-bottom: 1px solid black') #{comment.name}
+            p #{comment.comment}
  
 
  
