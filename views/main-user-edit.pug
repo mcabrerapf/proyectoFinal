@@ -8,19 +8,19 @@ block content
 				input.form-control(name='_id', type='text', value= user._id, class='hidden')
 			.form-group
 				label Full Name (*)
-				input.form-control(name='name', type='text', placeholder='Enter your name...' value= user.name)
+				input.form-control(name='name', type='text', placeholder='Enter your name...', value= user.name, required)
 			.form-group
 				label Instrument (*)
-				input.form-control(name='instrument', type='text', placeholder='What instruments do you play?' value= user.instrument[0])
+				input.form-control(name='instrument', type='text', placeholder='What instruments do you play?', value= user.instrument[0], required)
 			.form-group
 				label Genres (*)
-				input.form-control(name='genre', type='text', placeholder='What Genres do you play?' value= user.genre[0])
+				input.form-control(name='genre', type='text', placeholder='What Genres do you play?', value= user.genre[0], required)
 			.form-group
 				label Studies
-				input.form-control(name='studies', type='text', placeholder='List your studies if any...' value= user.studies[0])
+				input.form-control(name='studies', type='text', placeholder='List your studies if any...', value= user.studies[0], required)
 			.form-group
 				label Material (*)
-				input.form-control(name='material', type='text', placeholder='What musical material do you own? (Ex. Guitar, Bass, Guitar Amp)' value= user.material[0])
+				input.form-control(name='material', type='text', placeholder='What musical material do you own? (Ex. Guitar, Bass, Guitar Amp)', value= user.material[0], required)
 			.form-group
 				label Bands
 				input.form-control(name='bands', type='text', placeholder='Enter bands you have played in (if none leave empty)...' value= user.bands[0])
@@ -31,13 +31,13 @@ block content
 			//- 	label Pic
 			//- 	input.form-control(name='pic', type='text')
 			h2 Brief Description (*)
-			textarea(rows='4', cols='30', name='description', type='text', placeholder='Tell us about yourself...' value= user.description)
+			textarea(rows='4', cols='30', name='description', type='text', placeholder='Tell us about yourself...' required) #{user.description}
 			h2 External contact info:
 			.form-group
 				label Email (*)
-				input.form-control(name='email', type='email', placeholder='Type your email...' value= user.email)
+				input.form-control(name='email', type='email', placeholder='Type your email...', value= user.email, required)
 			div
 				label Phone (*)
-				input.form-control(name='phone', type='text', placeholder='Type your phone...' value= user.phone)
+				input.form-control(name='phone', type='text', placeholder='Type your phone...', value= user.phone, required)
 			div(style='margin-top: 20px; margin-bottom: 100px')
 				button.btn.btn-primary.btn-block(type='submit') Submit
